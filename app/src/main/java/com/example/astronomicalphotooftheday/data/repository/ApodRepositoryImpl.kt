@@ -13,6 +13,7 @@ import java.io.IOException
 
 class ApodRepositoryImpl(
     private val api: ApodApi,
+    private val dao: ApodDao
 ): ApodRepository {
 
     override suspend fun getTodayApod(): ApodDto {
@@ -23,8 +24,7 @@ class ApodRepositoryImpl(
         return api.getRandomApods(number)
     }
 
-//    override suspend fun insertApod(apodEntity: ApodEntity) {
-//        return dao.insertApod(apodEntity)
-//    }
-
+    override suspend fun insertApod(apodEntity: ApodEntity) {
+        return dao.insertApod(apodEntity)
+    }
 }

@@ -10,5 +10,5 @@ interface ApodRepository {
 
     suspend fun getRandomApods(number: String): List<ApodDto>
 
-//    suspend fun insertApod(apodEntity: ApodEntity)
+    suspend fun insertApod(apodEntity: ApodEntity)
 }
