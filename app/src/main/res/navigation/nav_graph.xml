@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/apodMainScreenFragment">
+
+    <fragment
+        android:id="@+id/apodMainScreenFragment"
+        android:name="com.example.astronomicalphotooftheday.presentation.apod_main_screen.ApodMainScreenFragment"
+        android:label="fragment_apod_main_screen"
+        tools:layout="@layout/fragment_apod_main_screen">
+        <action
+            android:id="@+id/navigateToApodTodayFragment"
+            app:destination="@id/apodTodayFragment" />
+        <action
+            android:id="@+id/navigateToApodItemsFragment"
+            app:destination="@id/apodItemsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/apodTodayFragment"
+        android:name="com.example.astronomicalphotooftheday.presentation.apod_today_screen.ApodTodayFragment"
+        android:label="fragment_apod_today"
+        tools:layout="@layout/fragment_apod_today" />
+    <fragment
+        android:id="@+id/apodItemsFragment"
+        android:name="com.example.astronomicalphotooftheday.presentation.apod_multiple_items_screen.ApodRandomFragment"
+        android:label="fragment_apod_items"
+        tools:layout="@layout/fragment_apod_random">
+
+        <argument
+            android:name="apodType"
+            app:argType="com.example.astronomicalphotooftheday.core.utils.ApodType"
+            android:defaultValue="EMPTY" />
+    </fragment>
+</navigation>
