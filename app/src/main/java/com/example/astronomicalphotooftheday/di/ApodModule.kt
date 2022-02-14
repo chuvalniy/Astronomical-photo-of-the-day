@@ -32,15 +32,15 @@ object ApodModule {
         )
     }
 
-    @Provides
-    @Singleton
-    fun provideApodDatabase(application: Application): RoomDatabase {
-        return Room.databaseBuilder(
-            application,
-            RoomDatabase::class.java,
-            "apod_db"
-        ).build()
-    }
+//    @Provides
+//    @Singleton
+//    fun provideApodDatabase(application: Application): RoomDatabase {
+//        return Room.databaseBuilder(
+//            application,
+//            RoomDatabase::class.java,
+//            "apod_db"
+//        ).build()
+//    }
 
     @Provides
     @Singleton
@@ -54,7 +54,7 @@ object ApodModule {
 
     @Provides
     @Singleton
-    fun provideApodRepository(api: ApodApi, db: ApodDatabase): ApodRepository {
-        return ApodRepositoryImpl(api, db.dao)
+    fun provideApodRepository(api: ApodApi): ApodRepository {
+        return ApodRepositoryImpl(api)
     }
 }

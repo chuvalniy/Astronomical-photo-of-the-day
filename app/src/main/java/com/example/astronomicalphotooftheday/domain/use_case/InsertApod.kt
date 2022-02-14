@@ -7,7 +7,7 @@ class InsertApod(
     val repository: ApodRepository
 ) {
 
-    suspend operator fun invoke(apod: Apod) {
-        repository.insertApod(apod.toApodEntity())
-    }
+//    suspend operator fun invoke(apod: Apod) {
+//        repository.insertApod(apod.toApodEntity())
+//    }
 }

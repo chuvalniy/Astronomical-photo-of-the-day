@@ -1,19 +1,13 @@
 package com.example.astronomicalphotooftheday.presentation.apod_main_screen
 
-import android.content.DialogInterface
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
-import androidx.fragment.app.FragmentResultListener
-import androidx.navigation.Navigation
 import androidx.navigation.fragment.findNavController
 import com.example.astronomicalphotooftheday.R
-import com.example.astronomicalphotooftheday.core.utils.ApodType
 import com.example.astronomicalphotooftheday.databinding.FragmentApodMainScreenBinding
-import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import dagger.hilt.android.AndroidEntryPoint
 
 
@@ -36,7 +30,7 @@ class ApodMainScreenFragment : Fragment() {
                 findNavController().navigate(R.id.navigateToApodTodayFragment)
             }
             cvRandom.setOnClickListener {
-                val action = ApodMainScreenFragmentDirections.navigateToApodItemsFragment(ApodType.RANDOM)
+                val action = ApodMainScreenFragmentDirections.navigateToApodItemsFragment()
                 findNavController().navigate(action)
             }
         }
