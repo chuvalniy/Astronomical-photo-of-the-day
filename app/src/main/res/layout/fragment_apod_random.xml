@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".presentation.apod_multiple_items_screen.ApodRandomFragment">
+    tools:context=".presentation.apod_random_items_screen.ApodRandomFragment">
 
     <ProgressBar
         android:id="@+id/pbLoadingItems"

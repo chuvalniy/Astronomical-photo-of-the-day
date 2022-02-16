@@ -7,7 +7,7 @@ import com.example.astronomicalphotooftheday.data.local.entity.ApodEntity
 interface ApodDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertMultipleApods(apods: List<ApodEntity>)
+    suspend fun insertApods(apods: List<ApodEntity>)
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertApod(apod: ApodEntity)

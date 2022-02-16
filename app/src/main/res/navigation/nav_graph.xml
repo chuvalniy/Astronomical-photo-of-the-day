@@ -24,9 +24,14 @@
         tools:layout="@layout/fragment_apod_today" />
     <fragment
         android:id="@+id/apodRandomFragment"
-        android:name="com.example.astronomicalphotooftheday.presentation.apod_multiple_items_screen.ApodRandomFragment"
+        android:name="com.example.astronomicalphotooftheday.presentation.apod_random_items_screen.ApodRandomFragment"
         android:label="Random Photos"
         tools:layout="@layout/fragment_apod_random">
 
     </fragment>
+    <fragment
+        android:id="@+id/apodFavoritesFragment"
+        android:name="com.example.astronomicalphotooftheday.presentation.apod_favorites_screen.ApodFavoritesFragment"
+        android:label="fragment_apod_favorites"
+        tools:layout="@layout/fragment_apod_favorites" />
 </navigation>

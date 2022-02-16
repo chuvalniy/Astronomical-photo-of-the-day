@@ -1,4 +1,4 @@
-package com.example.astronomicalphotooftheday.presentation.apod_multiple_items_screen
+package com.example.astronomicalphotooftheday.presentation.apod_random_items_screen
 
 import android.view.LayoutInflater
 import android.view.View
@@ -11,20 +11,28 @@ import com.example.astronomicalphotooftheday.databinding.AdapterApodItemBinding
 import com.example.astronomicalphotooftheday.domain.model.Apod
 
 class ApodRandomAdapter(
-) : ListAdapter<Apod, ApodRandomAdapter.ApodItemsViewHolder>(DiffCallback) {
+    private var onAdd: (Apod) -> Unit
+) : ListAdapter<Apod, ApodRandomAdapter.ApodItemsViewHolder>(ApodRandomDiffCallback) {
 
     class ApodItemsViewHolder(
-        val binding: AdapterApodItemBinding
+        val binding: AdapterApodItemBinding,
+        private var onAdd: (Apod) -> Unit
     ) : RecyclerView.ViewHolder(binding.root) {
 
-        init {
-            binding.btnDetail.setOnClickListener {
-                // Extend card with detail info
-                if (binding.extendedLinearLayout.visibility == View.GONE)
-                    binding.extendedLinearLayout.visibility = View.VISIBLE
-                else
-                    binding.extendedLinearLayout.visibility = View.GONE
+        fun bind(apod: Apod) {
+            binding.apply {
+                btnDetail.setOnClickListener {
+                    // Extend card with detail info
+                    if (extendedLinearLayout.visibility == View.GONE)
+                        extendedLinearLayout.visibility = View.VISIBLE
+                    else
+                        extendedLinearLayout.visibility = View.GONE
+                }
+                btnAddFavorites.setOnClickListener {
+                    onAdd(apod)
+                }
             }
+
         }
     }
 
@@ -32,7 +40,8 @@ class ApodRandomAdapter(
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ApodItemsViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
         return ApodItemsViewHolder(
-            AdapterApodItemBinding.inflate(layoutInflater, parent, false)
+            AdapterApodItemBinding.inflate(layoutInflater, parent, false),
+            onAdd
         )
     }
 
@@ -41,9 +50,10 @@ class ApodRandomAdapter(
         holder.binding.tvTitleItem.text = apodItem.title
         holder.binding.imgApodItem.load(apodItem.url)
         holder.binding.tvContentItem.text = apodItem.explanation
+        holder.bind(apodItem)
     }
 
-    companion object DiffCallback : DiffUtil.ItemCallback<Apod>() {
+    companion object ApodRandomDiffCallback : DiffUtil.ItemCallback<Apod>() {
         override fun areItemsTheSame(oldItem: Apod, newItem: Apod): Boolean {
             return oldItem == newItem
         }

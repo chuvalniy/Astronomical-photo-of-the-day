@@ -1,4 +1,4 @@
-package com.example.astronomicalphotooftheday.presentation.apod_multiple_items_screen
+package com.example.astronomicalphotooftheday.presentation.apod_random_items_screen
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -7,6 +7,7 @@ import com.example.astronomicalphotooftheday.domain.model.Apod
 import com.example.astronomicalphotooftheday.domain.use_case.ApodUseCases
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.*
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
@@ -19,6 +20,12 @@ class ApodRandomViewModel @Inject constructor(
 
     private val _isLoading = MutableStateFlow(false)
     val isLoading = _isLoading.asStateFlow()
+
+    fun insertApods(apod: Apod) {
+        viewModelScope.launch {
+            apodUseCases.insertApod(apod)
+        }
+    }
 
     init {
         // 5 is a test value

@@ -1,4 +1,4 @@
-package com.example.astronomicalphotooftheday.presentation.apod_multiple_items_screen
+package com.example.astronomicalphotooftheday.presentation.apod_random_items_screen
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import com.example.astronomicalphotooftheday.databinding.FragmentApodRandomBinding
 import dagger.hilt.android.AndroidEntryPoint
@@ -18,7 +19,7 @@ class ApodRandomFragment : Fragment() {
     private var _binding: FragmentApodRandomBinding? = null
     private val binding get() = _binding!!
 
-    private val viewModel: ApodRandomViewModel by activityViewModels()
+    private val viewModel: ApodRandomViewModel by viewModels()
 
     private lateinit var adapter: ApodRandomAdapter
 
@@ -28,7 +29,11 @@ class ApodRandomFragment : Fragment() {
     ): View {
         _binding = FragmentApodRandomBinding.inflate(inflater, container, false)
 
-        adapter = ApodRandomAdapter()
+        adapter = ApodRandomAdapter(
+            onAdd = { apod ->
+                viewModel.insertApods(apod)
+            }
+        )
 
         viewLifecycleOwner.lifecycleScope.launchWhenStarted {
             launch {

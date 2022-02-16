@@ -10,4 +10,5 @@
     <string name="random_photo">RANDOM PHOTO</string>
     <string name="home">Home</string>
     <string name="favorites">Favorites</string>
+    <string name="remove_from_favorites">Remove from favorites</string>
 </resources>

@@ -8,9 +8,7 @@ import com.example.astronomicalphotooftheday.data.local.ApodDatabase
 import com.example.astronomicalphotooftheday.data.remote.ApodApi
 import com.example.astronomicalphotooftheday.data.repository.ApodRepositoryImpl
 import com.example.astronomicalphotooftheday.domain.repository.ApodRepository
-import com.example.astronomicalphotooftheday.domain.use_case.ApodUseCases
-import com.example.astronomicalphotooftheday.domain.use_case.GetRandomApods
-import com.example.astronomicalphotooftheday.domain.use_case.GetTodayApod
+import com.example.astronomicalphotooftheday.domain.use_case.*
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -29,6 +27,8 @@ object ApodModule {
         return ApodUseCases(
             getTodayApod = GetTodayApod(repository),
             getRandomApods = GetRandomApods(repository),
+            insertApod = InsertApod(repository),
+            getAllApods = GetAllApods(repository)
         )
     }
 

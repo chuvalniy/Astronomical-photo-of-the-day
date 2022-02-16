@@ -12,4 +12,14 @@ data class ApodEntity(
     val title: String,
     val url: String?,
     @PrimaryKey val id: Int? = null
-)
+) {
+    fun toApod(): Apod {
+        return Apod(
+            date = date,
+            explanation = explanation,
+            hdurl = hdurl,
+            title = title,
+            url = url
+        )
+    }
+}

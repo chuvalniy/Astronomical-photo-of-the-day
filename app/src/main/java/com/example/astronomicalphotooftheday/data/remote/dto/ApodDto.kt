@@ -1,6 +1,5 @@
 package com.example.astronomicalphotooftheday.data.remote.dto
 
-import com.example.astronomicalphotooftheday.data.local.entity.ApodEntity
 import com.example.astronomicalphotooftheday.domain.model.Apod
 import com.google.gson.annotations.SerializedName
 
