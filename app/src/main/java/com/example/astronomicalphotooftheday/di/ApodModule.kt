@@ -28,7 +28,8 @@ object ApodModule {
             getTodayApod = GetTodayApod(repository),
             getRandomApods = GetRandomApods(repository),
             insertApod = InsertApod(repository),
-            getAllApods = GetAllApods(repository)
+            getAllApods = GetAllApods(repository),
+            deleteApod = DeleteApod(repository)
         )
     }
 
