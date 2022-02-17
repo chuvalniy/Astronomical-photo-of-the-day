@@ -1,7 +1,9 @@
 package com.example.astronomicalphotooftheday.domain.repository
 
+import androidx.lifecycle.LiveData
 import com.example.astronomicalphotooftheday.data.local.entity.ApodEntity
 import com.example.astronomicalphotooftheday.data.remote.dto.ApodDto
+import kotlinx.coroutines.flow.Flow
 
 interface ApodRepository {
 
@@ -11,7 +13,9 @@ interface ApodRepository {
 
     suspend fun insertApods(apods: List<ApodEntity>)
 
-    suspend fun getAll(): List<ApodEntity>
+    fun getAll(): LiveData<List<ApodEntity>>
+
+    suspend fun deleteApod(apod: ApodEntity)
 
     suspend fun insertApod(apod: ApodEntity)
 }

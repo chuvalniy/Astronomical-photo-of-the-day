@@ -1,5 +1,6 @@
 package com.example.astronomicalphotooftheday.presentation.apod_random_items_screen
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -23,12 +24,14 @@ class ApodRandomAdapter(
             binding.apply {
                 btnDetail.setOnClickListener {
                     // Extend card with detail info
+                    Log.d("TEST_BUTTON", "Detail")
                     if (extendedLinearLayout.visibility == View.GONE)
                         extendedLinearLayout.visibility = View.VISIBLE
                     else
                         extendedLinearLayout.visibility = View.GONE
                 }
                 btnAddFavorites.setOnClickListener {
+                    Log.d("TEST_BUTTON", "Add")
                     onAdd(apod)
                 }
             }
