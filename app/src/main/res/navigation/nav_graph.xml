@@ -32,6 +32,6 @@
     <fragment
         android:id="@+id/apodFavoritesFragment"
         android:name="com.example.astronomicalphotooftheday.presentation.apod_favorites_screen.ApodFavoritesFragment"
-        android:label="fragment_apod_favorites"
+        android:label="Favorites"
         tools:layout="@layout/fragment_apod_favorites" />
 </navigation>

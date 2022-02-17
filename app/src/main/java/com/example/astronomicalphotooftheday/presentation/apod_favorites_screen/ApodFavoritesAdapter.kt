@@ -1,16 +1,14 @@
 package com.example.astronomicalphotooftheday.presentation.apod_favorites_screen
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
 import com.example.astronomicalphotooftheday.data.local.entity.ApodEntity
 import com.example.astronomicalphotooftheday.databinding.AdapterFavoritesItemBinding
-import com.example.astronomicalphotooftheday.domain.model.Apod
+
 
 class ApodFavoritesAdapter(
     private var onDelete: (ApodEntity) -> Unit,
