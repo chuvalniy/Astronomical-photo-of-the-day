@@ -24,14 +24,12 @@ class ApodRandomAdapter(
             binding.apply {
                 btnDetail.setOnClickListener {
                     // Extend card with detail info
-                    Log.d("TEST_BUTTON", "Detail")
                     if (extendedLinearLayout.visibility == View.GONE)
                         extendedLinearLayout.visibility = View.VISIBLE
                     else
                         extendedLinearLayout.visibility = View.GONE
                 }
                 btnAddFavorites.setOnClickListener {
-                    Log.d("TEST_BUTTON", "Add")
                     onAdd(apod)
                 }
             }
@@ -53,6 +51,7 @@ class ApodRandomAdapter(
         holder.binding.tvTitleItem.text = apodItem.title
         holder.binding.imgApodItem.load(apodItem.url)
         holder.binding.tvContentItem.text = apodItem.explanation
+        holder.binding.tvDateItem.text = apodItem.date
         holder.bind(apodItem)
     }
 
