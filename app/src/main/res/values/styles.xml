@@ -19,8 +19,18 @@
         <item name="android:textSize">18sp</item>
     </style>
 
+    <style name="Body.b2" parent="Body">
+        <item name="android:textSize">14sp</item>
+        <item name="android:fontFamily">@font/caros_soft</item>
+        <item name="android:textColor">@color/black</item>
+    </style>
+
     <style name="Headline.h1" parent="Headline">
         <item name="android:textSize">22sp</item>
+    </style>
+
+    <style name="Headline.h2" parent="Headline">
+        <item name="android:textSize">20sp</item>
     </style>
 
 
