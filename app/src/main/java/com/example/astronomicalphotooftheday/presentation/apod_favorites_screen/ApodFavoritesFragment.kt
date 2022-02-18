@@ -44,14 +44,6 @@ class ApodFavoritesFragment : Fragment() {
                 }
         }
 
-//        viewLifecycleOwner.lifecycleScope.launchWhenStarted {
-//            viewModel.savedApods.collectLatest { apods ->
-//                apods?.let {
-//                    adapter.submitList(apods)
-//                }
-//            }
-//        }
-
         binding.rvFavoriteApods.adapter = adapter
 
         return binding.root
