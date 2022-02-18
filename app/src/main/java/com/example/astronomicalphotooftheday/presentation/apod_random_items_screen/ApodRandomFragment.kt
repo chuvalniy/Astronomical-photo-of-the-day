@@ -5,13 +5,14 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.activityViewModels
+import android.widget.Toast
+import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import com.example.astronomicalphotooftheday.databinding.FragmentApodRandomBinding
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.flow.collectLatest
-import kotlinx.coroutines.launch
+import kotlinx.coroutines.flow.collect
+
 
 @AndroidEntryPoint
 class ApodRandomFragment : Fragment() {
@@ -36,21 +37,24 @@ class ApodRandomFragment : Fragment() {
         )
 
         viewLifecycleOwner.lifecycleScope.launchWhenStarted {
-            launch {
-                viewModel.isLoading.collectLatest { isLoading ->
-                    if (isLoading) { // * Implement this in ViewModel *
-                        binding.pbLoadingItems.visibility = View.VISIBLE
-                    } else {
-                        binding.pbLoadingItems.visibility = View.GONE
+            viewModel.uiEvent.collect { event ->
+                when (event) {
+                    is ApodRandomEvent.Failure -> {
+                        binding.pbLoadingItems.isVisible = false
+                        binding.rvApodItems.isVisible = false
+                        binding.imgNoInternetRandomApod.isVisible = true
+                        Toast.makeText(activity, event.errorText, Toast.LENGTH_SHORT).show()
                     }
-                }
-            }
-
-            launch {
-                viewModel.listApods.collectLatest { items ->
-                    items?.let {
-                        adapter.submitList(it)
+                    is ApodRandomEvent.Success -> {
+                        binding.pbLoadingItems.isVisible = false
+                        binding.rvApodItems.isVisible = true
+                        adapter.submitList(event.apods)
                     }
+                    is ApodRandomEvent.Loading -> {
+                        binding.pbLoadingItems.isVisible = true
+                        binding.rvApodItems.isVisible = false
+                    }
+                    else -> Unit
                 }
             }
         }

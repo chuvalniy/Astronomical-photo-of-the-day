@@ -13,15 +13,14 @@ class GetRandomApods(
     private val repository: ApodRepository
 ) {
 
-    operator fun invoke(number: String): Flow<Resource<List<Apod>>> = flow {
-        try {
-            emit(Resource.Loading())
+    suspend operator fun invoke(number: String): Resource<List<Apod>> {
+        return try {
             val remoteData = repository.getRandomApods(number).map { it.toApod() }
-            emit(Resource.Success(remoteData))
+            Resource.Success(data = remoteData)
         } catch (e: HttpException) {
-            emit(Resource.Error(message = "HttpExcpetion"))
+            Resource.Error(message = e.message ?: "An error occurred")
         } catch (e: IOException) {
-            emit(Resource.Error(message = "IOExcpetion"))
+            Resource.Error(message = e.message ?: "An error occurred")
         }
     }
 }
