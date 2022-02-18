@@ -17,7 +17,7 @@
   <img src="https://user-images.githubusercontent.com/85331232/154659244-36e6f144-aed8-44d8-838f-0bf946937d67.jpg">
   <img src="https://user-images.githubusercontent.com/85331232/154659246-bab5325f-12a7-45f6-8d79-da3e04de67c0.jpg">
    <img src="https://user-images.githubusercontent.com/85331232/154659242-f022f40a-a647-451f-88a9-3978495531af.jpg">
-  <img src="https://user-images.githubusercontent.com/85331232/154659246-bab5325f-12a7-45f6-8d79-da3e04de67c0.jpg">
+  <img src="https://user-images.githubusercontent.com/85331232/154659593-61ffec01-4c8d-42a9-9b22-346fbf41bc12.jpg">
 </p>
 
 ## Architecture Components
