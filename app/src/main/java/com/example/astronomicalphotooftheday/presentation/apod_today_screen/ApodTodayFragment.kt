@@ -35,9 +35,11 @@ class ApodTodayFragment : Fragment() {
                     if (isLoading) {
                         binding.pbLoading.visibility = View.VISIBLE
                         binding.divApodItem.visibility = View.GONE
+                        binding.btnAddFavoritesFromToday.visibility = View.GONE
                     } else {
                         binding.pbLoading.visibility = View.GONE
                         binding.divApodItem.visibility = View.VISIBLE
+                        binding.btnAddFavoritesFromToday.visibility = View.VISIBLE
                     }
                 }
             }
@@ -45,8 +47,12 @@ class ApodTodayFragment : Fragment() {
                 viewModel.apodItem.collectLatest { item ->
                     item?.let {
                         binding.tvTitle.text = it.title
+                        binding.tvDate.text = it.date
                         binding.tvContent.text = it.explanation
                         binding.imgApod.load(it.url)
+                        binding.btnAddFavoritesFromToday.setOnClickListener {
+                            viewModel.insertApods(item)
+                        }
                     }
                 }
             }

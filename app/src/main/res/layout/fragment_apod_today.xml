@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:clipChildren="false"
+    android:clipToPadding="false"
     android:orientation="vertical"
-    android:layout_margin="16dp"
+    android:padding="16dp"
     tools:context=".presentation.apod_today_screen.ApodTodayFragment">
 
 
@@ -20,7 +21,8 @@
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:scrollbars="none">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -40,14 +42,37 @@
                     android:textColor="@color/black"
                     tools:src="@tools:sample/avatars" />
 
-                <TextView
-                    android:id="@+id/tvTitle"
-                    android:layout_width="wrap_content"
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="bottom|center"
-                    android:text=""
-                    android:textColor="@color/white"
-                    tools:text="Title" />
+                    android:layout_gravity="bottom"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/tvDate"
+                        style="@style/Body.b2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="bottom"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginBottom="4dp"
+                        android:text=""
+                        android:textColor="@color/white"
+                        tools:text="Date" />
+
+                    <TextView
+                        android:id="@+id/tvTitle"
+                        style="@style/Body.b1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="bottom"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginBottom="4dp"
+                        android:text=""
+                        tools:text="Title" />
+
+                </LinearLayout>
+
 
             </androidx.cardview.widget.CardView>
 
@@ -63,14 +88,24 @@
 
             <TextView
                 android:id="@+id/tvContent"
+                style="@style/Body.b2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:justificationMode="inter_word"
                 android:text=""
-                android:textAppearance="?attr/textAppearanceBody2"
                 tools:text="Content" />
 
-        </LinearLayout>
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnAddFavoritesFromToday"
+                style="?attr/borderlessButtonStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="8dp"
+                android:text="@string/add_to_favorites"
+                android:visibility="gone" />
 
+        </LinearLayout>
 
     </ScrollView>
 
