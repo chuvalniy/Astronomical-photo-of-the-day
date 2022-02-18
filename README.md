@@ -14,13 +14,10 @@
 ## App Preview
 
 <p align="center">
-  <img src="https://user-images.githubusercontent.com/85331232/154656775-46196c02-1db4-4095-8c3f-b39828924da1.jpg">
-  <img src="https://user-images.githubusercontent.com/85331232/154656951-62d8b5c1-7d3f-42fe-9763-bd316cc6fde8.jpg">
-</p>
-
-<p align="center">
-  <img src="https://user-images.githubusercontent.com/85331232/154656764-29785681-0479-4d4f-af27-63dcce85f6d9.jpg">
-  <img src="https://user-images.githubusercontent.com/85331232/154656955-6ed11c9b-7d1d-4e97-ac63-d4e9057bf650.jpg">
+  <img src="https://user-images.githubusercontent.com/85331232/154659244-36e6f144-aed8-44d8-838f-0bf946937d67.jpg">
+  <img src="https://user-images.githubusercontent.com/85331232/154659246-bab5325f-12a7-45f6-8d79-da3e04de67c0.jpg">
+   <img src="https://user-images.githubusercontent.com/85331232/154659242-f022f40a-a647-451f-88a9-3978495531af.jpg">
+  <img src="https://user-images.githubusercontent.com/85331232/154659246-bab5325f-12a7-45f6-8d79-da3e04de67c0.jpg">
 </p>
 
 ## Architecture Components
