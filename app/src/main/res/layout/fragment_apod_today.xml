@@ -18,8 +18,17 @@
         android:layout_gravity="center"
         android:visibility="gone" />
 
+    <ImageView
+        android:id="@+id/imgNoInternetTodayApod"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_gravity="center"
+        android:src="@drawable/ic_connection_error"
+        android:visibility="gone" />
+
 
     <ScrollView
+        android:id="@+id/svTodayApod"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:scrollbars="none">

@@ -12,15 +12,14 @@ class GetTodayApod(
     private val repository: ApodRepository
 ) {
 
-    operator fun invoke(): Flow<Resource<Apod>> = flow {
-        try {
-            emit(Resource.Loading())
-            val remoteData = repository.getTodayApod().toApod()
-            emit(Resource.Success(remoteData))
+    suspend operator fun invoke(): Resource<Apod> {
+        return try {
+            val result = repository.getTodayApod().toApod()
+            Resource.Success(data = result)
         } catch (e: HttpException) {
-            emit(Resource.Error(message = "HttpException"))
+            Resource.Error(message = e.message ?: "An error occurred")
         } catch (e: IOException) {
-            emit(Resource.Error(message = "IOException"))
+            Resource.Error(message = e.message ?: "An error occurred")
         }
     }
 }

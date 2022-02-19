@@ -1,6 +1,7 @@
 package com.example.astronomicalphotooftheday.presentation.apod_favorites_screen
 
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
@@ -23,6 +24,12 @@ class ApodFavoritesAdapter(
             binding.apply {
                 btnRemoveFavorites.setOnClickListener {
                     onDelete(apod)
+                }
+                btnFavoritesDetail.setOnClickListener {
+                    if (extendedLinearLayout.visibility == View.GONE)
+                        extendedLinearLayout.visibility = View.VISIBLE
+                    else
+                        extendedLinearLayout.visibility = View.GONE
                 }
             }
         }

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/home"
+    app:startDestination="@id/apodMainScreenFragment">
+
+    <fragment
+        android:id="@+id/apodMainScreenFragment"
+        android:name="com.example.astronomicalphotooftheday.presentation.apod_main_screen.ApodMainScreenFragment"
+        android:label="Home"
+        tools:layout="@layout/fragment_apod_main_screen">
+        <action
+            android:id="@+id/navigateToApodTodayFragment"
+            app:destination="@id/apodTodayFragment" />
+        <action
+            android:id="@+id/navigateToApodItemsFragment"
+            app:destination="@id/apodRandomFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/apodTodayFragment"
+        android:name="com.example.astronomicalphotooftheday.presentation.apod_today_screen.ApodTodayFragment"
+        android:label="Today Photo"
+        tools:layout="@layout/fragment_apod_today" />
+    <fragment
+        android:id="@+id/apodRandomFragment"
+        android:name="com.example.astronomicalphotooftheday.presentation.apod_random_items_screen.ApodRandomFragment"
+        android:label="Random Photos"
+        tools:layout="@layout/fragment_apod_random">
+
+    </fragment>
+</navigation>

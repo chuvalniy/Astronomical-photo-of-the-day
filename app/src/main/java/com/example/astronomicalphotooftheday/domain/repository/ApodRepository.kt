@@ -9,7 +9,7 @@ interface ApodRepository {
 
     suspend fun getTodayApod(): ApodDto
 
-    suspend fun getRandomApods(number: String): List<ApodDto>
+    suspend fun getRandomApods(): List<ApodDto>
 
     suspend fun insertApods(apods: List<ApodEntity>)
 

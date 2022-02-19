@@ -19,18 +19,7 @@ class ApodFavoritesViewModel @Inject constructor(
     private val useCases: ApodUseCases
 ) : ViewModel() {
 
-//    private val _savedApods = MutableStateFlow<List<Apod>?>(null)
     val savedApods = useCases.getAllApods()
-
-//    init {
-//        getAll()
-//    }
-//
-//    private fun getAll() {
-//        viewModelScope.launch {
-//            _savedApods.value = useCases.getAllApods()
-//        }
-//    }
 
     fun deleteApod(apod: ApodEntity) {
         viewModelScope.launch(Dispatchers.IO) {

@@ -5,11 +5,15 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.core.view.isVisible
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
 import coil.load
+import com.example.astronomicalphotooftheday.R
 import com.example.astronomicalphotooftheday.databinding.FragmentApodTodayBinding
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
@@ -28,32 +32,35 @@ class ApodTodayFragment : Fragment() {
     ): View {
         _binding = FragmentApodTodayBinding.inflate(inflater, container, false)
 
-        // * Implement state variable in ViewModel *
         viewLifecycleOwner.lifecycleScope.launchWhenStarted {
-            launch {
-                viewModel.isLoading.collectLatest { isLoading ->
-                    if (isLoading) {
-                        binding.pbLoading.visibility = View.VISIBLE
-                        binding.divApodItem.visibility = View.GONE
-                        binding.btnAddFavoritesFromToday.visibility = View.GONE
-                    } else {
-                        binding.pbLoading.visibility = View.GONE
-                        binding.divApodItem.visibility = View.VISIBLE
-                        binding.btnAddFavoritesFromToday.visibility = View.VISIBLE
-                    }
-                }
-            }
-            launch {
-                viewModel.apodItem.collectLatest { item ->
-                    item?.let {
-                        binding.tvTitle.text = it.title
-                        binding.tvDate.text = it.date
-                        binding.tvContent.text = it.explanation
-                        binding.imgApod.load(it.url)
-                        binding.btnAddFavoritesFromToday.setOnClickListener {
-                            viewModel.insertApods(item)
+            viewModel.uiEvent.collect { event ->
+                when (event) {
+                    is ApodTodayEvent.Success -> {
+                        binding.apply {
+                            pbLoading.isVisible = false
+                            svTodayApod.isVisible = true
+                            tvTitle.text = event.apod.title
+                            tvDate.text = event.apod.date
+                            tvContent.text = event.apod.explanation
+                            imgApod.load(event.apod.url)
+                            btnAddFavoritesFromToday.setOnClickListener {
+                                viewModel.insertApods(event.apod)
+                            }
                         }
                     }
+                    is ApodTodayEvent.Failure -> {
+                        binding.apply {
+                            pbLoading.isVisible = false
+                            svTodayApod.isVisible = false
+                            imgNoInternetTodayApod.isVisible = true
+                        }
+                        Toast.makeText(activity, event.errorText, Toast.LENGTH_SHORT).show()
+                    }
+                    is ApodTodayEvent.Loading -> {
+                        binding.pbLoading.isVisible = true
+                        binding.svTodayApod.isVisible = false
+                    }
+                    else -> Unit
                 }
             }
         }
