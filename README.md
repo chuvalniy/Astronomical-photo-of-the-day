@@ -37,6 +37,4 @@
 ## Todo
 
 - Add image placeholder if api has no photos to give
-- Handle Internet connection error
-- Fix navigation bugs
-- Some code refactoring
+- Some code refactoring (Room)
