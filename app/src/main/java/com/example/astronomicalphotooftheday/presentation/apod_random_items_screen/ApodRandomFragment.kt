@@ -40,19 +40,26 @@ class ApodRandomFragment : Fragment() {
             viewModel.uiEvent.collect { event ->
                 when (event) {
                     is ApodRandomEvent.Failure -> {
-                        binding.pbLoadingItems.isVisible = false
-                        binding.rvApodItems.isVisible = false
-                        binding.imgNoInternetRandomApod.isVisible = true
+                        binding.apply {
+                            pbLoadingItems.isVisible = false
+                            rvApodItems.isVisible = false
+                            imgNoInternetRandomApod.isVisible = true
+                        }
                         Toast.makeText(activity, event.errorText, Toast.LENGTH_SHORT).show()
                     }
                     is ApodRandomEvent.Success -> {
-                        binding.pbLoadingItems.isVisible = false
-                        binding.rvApodItems.isVisible = true
+                        binding.apply {
+                            pbLoadingItems.isVisible = false
+                            rvApodItems.isVisible = true
+                        }
                         adapter.submitList(event.apods)
                     }
                     is ApodRandomEvent.Loading -> {
-                        binding.pbLoadingItems.isVisible = true
-                        binding.rvApodItems.isVisible = false
+                        binding.apply {
+                            pbLoadingItems.isVisible = true
+                            rvApodItems.isVisible = false
+                        }
+
                     }
                     else -> Unit
                 }
@@ -60,7 +67,7 @@ class ApodRandomFragment : Fragment() {
         }
 
         binding.swipeRefreshLayout.setOnRefreshListener {
-            viewModel.getRandomApods("5") // 5 is a test value
+            viewModel.getRandomApods()
             binding.swipeRefreshLayout.isRefreshing = false
         }
         binding.rvApodItems.adapter = adapter

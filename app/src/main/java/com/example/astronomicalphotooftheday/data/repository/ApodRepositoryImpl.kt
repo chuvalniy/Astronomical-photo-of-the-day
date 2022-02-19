@@ -17,8 +17,8 @@ class ApodRepositoryImpl(
         return api.getTodayApod()
     }
 
-    override suspend fun getRandomApods(number: String): List<ApodDto> {
-        return api.getRandomApods(number)
+    override suspend fun getRandomApods(): List<ApodDto> {
+        return api.getRandomApods()
     }
 
     override suspend fun insertApods(apods: List<ApodEntity>) {

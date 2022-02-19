@@ -37,7 +37,6 @@ class ApodRandomAdapter(
         }
     }
 
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ApodItemsViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
         return ApodItemsViewHolder(
@@ -48,10 +47,12 @@ class ApodRandomAdapter(
 
     override fun onBindViewHolder(holder: ApodItemsViewHolder, position: Int) {
         val apodItem = getItem(position)
-        holder.binding.tvTitleItem.text = apodItem.title
-        holder.binding.imgApodItem.load(apodItem.url)
-        holder.binding.tvContentItem.text = apodItem.explanation
-        holder.binding.tvDateItem.text = apodItem.date
+        holder.binding.apply {
+            tvTitleItem.text = apodItem.title
+            imgApodItem.load(apodItem.url)
+            tvContentItem.text = apodItem.explanation
+            tvDateItem.text = apodItem.date
+        }
         holder.bind(apodItem)
     }
 

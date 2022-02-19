@@ -13,9 +13,9 @@ class GetRandomApods(
     private val repository: ApodRepository
 ) {
 
-    suspend operator fun invoke(number: String): Resource<List<Apod>> {
+    suspend operator fun invoke(): Resource<List<Apod>> {
         return try {
-            val remoteData = repository.getRandomApods(number).map { it.toApod() }
+            val remoteData = repository.getRandomApods().map { it.toApod() }
             Resource.Success(data = remoteData)
         } catch (e: HttpException) {
             Resource.Error(message = e.message ?: "An error occurred")

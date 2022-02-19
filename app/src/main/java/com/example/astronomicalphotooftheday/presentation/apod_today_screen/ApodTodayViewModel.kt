@@ -21,12 +21,6 @@ class ApodTodayViewModel @Inject constructor(
     private val useCases: ApodUseCases
 ): ViewModel() {
 
-//    private val _apodItem = MutableStateFlow<Apod?>(null)
-//    val apodItem = _apodItem.asStateFlow()
-//
-//    private val _isLoading = MutableStateFlow(false)
-//    val isLoading = _isLoading.asStateFlow()
-
     private val _uiEvent = MutableStateFlow<ApodTodayEvent>(ApodTodayEvent.Empty)
     val uiEvent = _uiEvent.asStateFlow()
 

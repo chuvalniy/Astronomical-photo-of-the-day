@@ -12,7 +12,7 @@ interface ApodApi {
 
     @GET("planetary/apod")
     suspend fun getRandomApods(
-        @Query("count") count: String,
+        @Query("count") count: String = "5",
         @Query("api_key") apiKey: String = API_KEY
     ): List<ApodDto>
 

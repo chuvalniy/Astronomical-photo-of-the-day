@@ -30,8 +30,7 @@ class ApodMainScreenFragment : Fragment() {
                 findNavController().navigate(R.id.navigateToApodTodayFragment)
             }
             cvRandom.setOnClickListener {
-                val action = ApodMainScreenFragmentDirections.navigateToApodItemsFragment()
-                findNavController().navigate(action)
+                findNavController().navigate(R.id.navigateToApodItemsFragment)
             }
         }
 

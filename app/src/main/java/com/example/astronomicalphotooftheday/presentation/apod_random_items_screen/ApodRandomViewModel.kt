@@ -16,12 +16,6 @@ class ApodRandomViewModel @Inject constructor(
     private val apodUseCases: ApodUseCases
 ): ViewModel() {
 
-    private val _listApods = MutableStateFlow<List<Apod>?>(null)
-    val listApods = _listApods.asStateFlow()
-
-    private val _isLoading = MutableStateFlow(false)
-    val isLoading = _isLoading.asStateFlow()
-
     private val _uiEvent = MutableStateFlow<ApodRandomEvent>(ApodRandomEvent.Empty)
     val uiEvent = _uiEvent.asStateFlow()
 
@@ -32,14 +26,13 @@ class ApodRandomViewModel @Inject constructor(
     }
 
     init {
-        // 5 is a test value
-        getRandomApods("5")
+        getRandomApods()
     }
 
-    fun getRandomApods(number: String) {
+    fun getRandomApods() {
         viewModelScope.launch {
             _uiEvent.value = ApodRandomEvent.Loading
-            when (val apodResponse = apodUseCases.getRandomApods("5")) {
+            when (val apodResponse = apodUseCases.getRandomApods()) {
                 is Resource.Error -> _uiEvent.value = ApodRandomEvent.Failure(apodResponse.message!!)
                 is Resource.Success -> _uiEvent.value = ApodRandomEvent.Success(apodResponse.data!!)
                 else -> Unit

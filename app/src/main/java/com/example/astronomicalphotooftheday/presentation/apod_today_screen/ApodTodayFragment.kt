@@ -36,20 +36,24 @@ class ApodTodayFragment : Fragment() {
             viewModel.uiEvent.collect { event ->
                 when (event) {
                     is ApodTodayEvent.Success -> {
-                        binding.pbLoading.isVisible = false
-                        binding.svTodayApod.isVisible = true
-                        binding.tvTitle.text = event.apod.title
-                        binding.tvDate.text = event.apod.date
-                        binding.tvContent.text = event.apod.explanation
-                        binding.imgApod.load(event.apod.url)
-                        binding.btnAddFavoritesFromToday.setOnClickListener {
-                            viewModel.insertApods(event.apod)
+                        binding.apply {
+                            pbLoading.isVisible = false
+                            svTodayApod.isVisible = true
+                            tvTitle.text = event.apod.title
+                            tvDate.text = event.apod.date
+                            tvContent.text = event.apod.explanation
+                            imgApod.load(event.apod.url)
+                            btnAddFavoritesFromToday.setOnClickListener {
+                                viewModel.insertApods(event.apod)
+                            }
                         }
                     }
                     is ApodTodayEvent.Failure -> {
-                        binding.pbLoading.isVisible = false
-                        binding.svTodayApod.isVisible = false
-                        binding.imgNoInternetTodayApod.isVisible = true
+                        binding.apply {
+                            pbLoading.isVisible = false
+                            svTodayApod.isVisible = false
+                            imgNoInternetTodayApod.isVisible = true
+                        }
                         Toast.makeText(activity, event.errorText, Toast.LENGTH_SHORT).show()
                     }
                     is ApodTodayEvent.Loading -> {
