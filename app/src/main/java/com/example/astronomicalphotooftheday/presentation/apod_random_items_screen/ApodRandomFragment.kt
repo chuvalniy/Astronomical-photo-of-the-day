@@ -9,26 +9,21 @@ import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import com.example.astronomicalphotooftheday.core.base.BaseFragment
 import com.example.astronomicalphotooftheday.databinding.FragmentApodRandomBinding
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collect
 
 
 @AndroidEntryPoint
-class ApodRandomFragment : Fragment() {
-
-    private var _binding: FragmentApodRandomBinding? = null
-    private val binding get() = _binding!!
+class ApodRandomFragment : BaseFragment<FragmentApodRandomBinding>() {
 
     private val viewModel: ApodRandomViewModel by viewModels()
 
     private lateinit var adapter: ApodRandomAdapter
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        _binding = FragmentApodRandomBinding.inflate(inflater, container, false)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
         adapter = ApodRandomAdapter(
             onAdd = { apod ->
@@ -39,6 +34,7 @@ class ApodRandomFragment : Fragment() {
         viewLifecycleOwner.lifecycleScope.launchWhenStarted {
             viewModel.uiEvent.collect { event ->
                 when (event) {
+
                     is ApodRandomEvent.Failure -> {
                         binding.apply {
                             pbLoadingItems.isVisible = false
@@ -47,6 +43,7 @@ class ApodRandomFragment : Fragment() {
                         }
                         Toast.makeText(activity, event.errorText, Toast.LENGTH_SHORT).show()
                     }
+
                     is ApodRandomEvent.Success -> {
                         binding.apply {
                             pbLoadingItems.isVisible = false
@@ -54,6 +51,7 @@ class ApodRandomFragment : Fragment() {
                         }
                         adapter.submitList(event.apods)
                     }
+
                     is ApodRandomEvent.Loading -> {
                         binding.apply {
                             pbLoadingItems.isVisible = true
@@ -61,6 +59,7 @@ class ApodRandomFragment : Fragment() {
                         }
 
                     }
+
                     else -> Unit
                 }
             }
@@ -72,11 +71,10 @@ class ApodRandomFragment : Fragment() {
         }
         binding.rvApodItems.adapter = adapter
 
-        return binding.root
     }
 
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
-    }
+    override fun initBinding(
+        inflater: LayoutInflater,
+        container: ViewGroup?
+    ) = FragmentApodRandomBinding.inflate(inflater, container, false)
 }

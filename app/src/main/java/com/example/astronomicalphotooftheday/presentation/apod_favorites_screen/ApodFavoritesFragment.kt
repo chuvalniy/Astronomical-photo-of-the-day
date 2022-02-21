@@ -11,26 +11,21 @@ import androidx.core.app.NotificationManagerCompat
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import com.example.astronomicalphotooftheday.core.base.BaseFragment
 import com.example.astronomicalphotooftheday.databinding.FragmentApodFavoritesBinding
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 
 
 @AndroidEntryPoint
-class ApodFavoritesFragment : Fragment() {
+class ApodFavoritesFragment : BaseFragment<FragmentApodFavoritesBinding>() {
 
-    private var _binding: FragmentApodFavoritesBinding? = null
-    private val binding get() = _binding!!
-
-    private val viewModel: ApodFavoritesViewModel by activityViewModels()
+    private val viewModel: ApodFavoritesViewModel by viewModels()
 
     private lateinit var adapter: ApodFavoritesAdapter
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        _binding = FragmentApodFavoritesBinding.inflate(inflater, container, false)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
         adapter = ApodFavoritesAdapter(
             onDelete = { apod ->
@@ -39,18 +34,18 @@ class ApodFavoritesFragment : Fragment() {
         )
 
         viewModel.savedApods.observe(this.viewLifecycleOwner) { apods ->
-                apods.let {
-                    adapter.submitList(it)
-                }
+            apods.let {
+                adapter.submitList(it)
+            }
         }
 
         binding.rvFavoriteApods.adapter = adapter
 
-        return binding.root
     }
 
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
-    }
+
+    override fun initBinding(
+        inflater: LayoutInflater,
+        container: ViewGroup?
+    ) = FragmentApodFavoritesBinding.inflate(inflater, container, false)
 }
