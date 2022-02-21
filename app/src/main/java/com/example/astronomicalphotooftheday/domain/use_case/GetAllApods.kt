@@ -10,7 +10,7 @@ import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.flow.*
 
 class GetAllApods(
-    val repository: ApodRepository
+    private val repository: ApodRepository
 ) {
 
     operator fun invoke(): LiveData<List<ApodEntity>> {

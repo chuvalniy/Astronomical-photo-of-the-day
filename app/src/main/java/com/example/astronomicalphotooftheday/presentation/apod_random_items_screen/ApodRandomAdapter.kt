@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
+import com.example.astronomicalphotooftheday.R
 import com.example.astronomicalphotooftheday.databinding.AdapterApodItemBinding
 import com.example.astronomicalphotooftheday.domain.model.Apod
 
@@ -16,14 +17,19 @@ class ApodRandomAdapter(
 ) : ListAdapter<Apod, ApodRandomAdapter.ApodItemsViewHolder>(ApodRandomDiffCallback) {
 
     class ApodItemsViewHolder(
-        val binding: AdapterApodItemBinding,
+        private val binding: AdapterApodItemBinding,
         private var onAdd: (Apod) -> Unit
     ) : RecyclerView.ViewHolder(binding.root) {
 
         fun bind(apod: Apod) {
             binding.apply {
+                tvTitleItem.text = apod.title
+                tvContentItem.text = apod.explanation
+                tvDateItem.text = apod.date
+                imgApodItem.load(apod.url) {
+                    placeholder(R.drawable.no_image_available)
+                }
                 btnDetail.setOnClickListener {
-                    // Extend card with detail info
                     if (extendedLinearLayout.visibility == View.GONE)
                         extendedLinearLayout.visibility = View.VISIBLE
                     else
@@ -33,7 +39,6 @@ class ApodRandomAdapter(
                     onAdd(apod)
                 }
             }
-
         }
     }
 
@@ -47,12 +52,6 @@ class ApodRandomAdapter(
 
     override fun onBindViewHolder(holder: ApodItemsViewHolder, position: Int) {
         val apodItem = getItem(position)
-        holder.binding.apply {
-            tvTitleItem.text = apodItem.title
-            imgApodItem.load(apodItem.url)
-            tvContentItem.text = apodItem.explanation
-            tvDateItem.text = apodItem.date
-        }
         holder.bind(apodItem)
     }
 
@@ -64,6 +63,5 @@ class ApodRandomAdapter(
         override fun areContentsTheSame(oldItem: Apod, newItem: Apod): Boolean {
             return oldItem.date == newItem.date
         }
-
     }
 }

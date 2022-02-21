@@ -8,9 +8,11 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.fragment.app.activityViewModels
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import coil.load
 import com.example.astronomicalphotooftheday.R
+import com.example.astronomicalphotooftheday.core.base.BaseFragment
 import com.example.astronomicalphotooftheday.databinding.FragmentApodTodayBinding
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collect
@@ -19,22 +21,18 @@ import kotlinx.coroutines.launch
 
 
 @AndroidEntryPoint
-class ApodTodayFragment : Fragment() {
+class ApodTodayFragment : BaseFragment<FragmentApodTodayBinding>() {
 
-    private var _binding: FragmentApodTodayBinding? = null
-    private val binding get() = _binding!!
 
-    private val viewModel: ApodTodayViewModel by activityViewModels()
+    private val viewModel: ApodTodayViewModel by viewModels()
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        _binding = FragmentApodTodayBinding.inflate(inflater, container, false)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
         viewLifecycleOwner.lifecycleScope.launchWhenStarted {
             viewModel.uiEvent.collect { event ->
                 when (event) {
+
                     is ApodTodayEvent.Success -> {
                         binding.apply {
                             pbLoading.isVisible = false
@@ -48,6 +46,7 @@ class ApodTodayFragment : Fragment() {
                             }
                         }
                     }
+
                     is ApodTodayEvent.Failure -> {
                         binding.apply {
                             pbLoading.isVisible = false
@@ -56,20 +55,21 @@ class ApodTodayFragment : Fragment() {
                         }
                         Toast.makeText(activity, event.errorText, Toast.LENGTH_SHORT).show()
                     }
+
                     is ApodTodayEvent.Loading -> {
                         binding.pbLoading.isVisible = true
                         binding.svTodayApod.isVisible = false
                     }
+
                     else -> Unit
                 }
             }
         }
 
-        return binding.root
     }
 
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
-    }
+    override fun initBinding(
+        inflater: LayoutInflater,
+        container: ViewGroup?
+    ) = FragmentApodTodayBinding.inflate(inflater, container, false)
 }

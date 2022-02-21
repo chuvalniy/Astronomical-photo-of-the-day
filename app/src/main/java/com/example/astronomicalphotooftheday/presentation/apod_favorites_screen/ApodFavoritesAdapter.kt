@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
+import com.example.astronomicalphotooftheday.R
 import com.example.astronomicalphotooftheday.data.local.entity.ApodEntity
 import com.example.astronomicalphotooftheday.databinding.AdapterFavoritesItemBinding
 
@@ -16,26 +17,33 @@ class ApodFavoritesAdapter(
 ) : ListAdapter<ApodEntity, ApodFavoritesAdapter.ApodFavoritesViewHolder>(ApodFavoritesDiffCallback) {
 
     class ApodFavoritesViewHolder(
-        val binding: AdapterFavoritesItemBinding,
+        private val binding: AdapterFavoritesItemBinding,
         private var onDelete: (ApodEntity) -> Unit,
     ) : RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(apod: ApodEntity) {
-            binding.apply {
-                btnRemoveFavorites.setOnClickListener {
-                    onDelete(apod)
-                }
-                btnFavoritesDetail.setOnClickListener {
-                    if (extendedLinearLayout.visibility == View.GONE)
-                        extendedLinearLayout.visibility = View.VISIBLE
-                    else
-                        extendedLinearLayout.visibility = View.GONE
-                }
+        fun bind(apod: ApodEntity) = binding.apply {
+            tvFavoritesTitleItem.text = apod.title
+            tvFavoritesDateItem.text = apod.date
+            tvFavoritesContentItem.text = apod.explanation
+            imgFavoritesApodItem.load(apod.url) {
+                placeholder(R.drawable.no_image_available)
+            }
+            btnRemoveFavorites.setOnClickListener {
+                onDelete(apod)
+            }
+            btnFavoritesDetail.setOnClickListener {
+                if (extendedLinearLayout.visibility == View.GONE)
+                    extendedLinearLayout.visibility = View.VISIBLE
+                else
+                    extendedLinearLayout.visibility = View.GONE
             }
         }
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ApodFavoritesViewHolder {
+    override fun onCreateViewHolder(
+        parent: ViewGroup,
+        viewType: Int
+    ): ApodFavoritesViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
         return ApodFavoritesViewHolder(
             AdapterFavoritesItemBinding.inflate(layoutInflater, parent, false),
@@ -43,17 +51,13 @@ class ApodFavoritesAdapter(
         )
     }
 
-    override fun onBindViewHolder(holder: ApodFavoritesViewHolder, position: Int) {
+    override fun onBindViewHolder(
+        holder: ApodFavoritesViewHolder,
+        position: Int
+    ) {
         val apodItem = getItem(position)
-        holder.binding.apply {
-            tvFavoritesTitleItem.text = apodItem.title
-            tvFavoritesDateItem.text = apodItem.date
-            tvFavoritesContentItem.text = apodItem.explanation
-            imgFavoritesApodItem.load(apodItem.url)
-        }
         holder.bind(apodItem)
     }
-
 
     companion object ApodFavoritesDiffCallback : DiffUtil.ItemCallback<ApodEntity>() {
         override fun areItemsTheSame(oldItem: ApodEntity, newItem: ApodEntity): Boolean {

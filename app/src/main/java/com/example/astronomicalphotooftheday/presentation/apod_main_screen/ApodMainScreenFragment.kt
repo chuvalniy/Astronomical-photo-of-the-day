@@ -7,21 +7,16 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
 import com.example.astronomicalphotooftheday.R
+import com.example.astronomicalphotooftheday.core.base.BaseFragment
 import com.example.astronomicalphotooftheday.databinding.FragmentApodMainScreenBinding
 import dagger.hilt.android.AndroidEntryPoint
 
 
 @AndroidEntryPoint
-class ApodMainScreenFragment : Fragment() {
+class ApodMainScreenFragment : BaseFragment<FragmentApodMainScreenBinding>() {
 
-    private var _binding: FragmentApodMainScreenBinding? = null
-    private val binding get() = _binding!!
-
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        _binding = FragmentApodMainScreenBinding.inflate(inflater, container, false)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
         binding.apply {
             imgTodayApod.setImageResource(R.drawable.today_apod_img)
@@ -34,11 +29,10 @@ class ApodMainScreenFragment : Fragment() {
             }
         }
 
-        return binding.root
     }
 
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
-    }
+    override fun initBinding(
+        inflater: LayoutInflater,
+        container: ViewGroup?
+    ) = FragmentApodMainScreenBinding.inflate(inflater, container, false)
 }
