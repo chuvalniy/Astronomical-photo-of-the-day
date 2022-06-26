@@ -4,12 +4,12 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/favorites"
-    app:startDestination="@id/apodFavoritesFragment">
+    app:startDestination="@id/favorites_screen">
 
     <fragment
-        android:id="@+id/apodFavoritesFragment"
-        android:name="com.example.astronomicalphotooftheday.presentation.apod_favorites_screen.ApodFavoritesFragment"
+        android:id="@+id/favorites_screen"
+        android:name="com.example.feature_favorites.favorites_screen.presentation.favorites_screen.FavoritesFragment"
         android:label="Favorites"
-        tools:layout="@layout/fragment_apod_favorites" />
+        tools:layout="@layout/fragment_favorites" />
 
 </navigation>

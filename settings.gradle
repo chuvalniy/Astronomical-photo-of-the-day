@@ -14,3 +14,6 @@ dependencyResolutionManagement {
 }
 rootProject.name = "Astronomical Photo of the Day"
 include ':app'
+include ':core'
+include ':feature-home'
+include ':feature-favorites'
