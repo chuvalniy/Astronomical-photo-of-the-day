@@ -30,7 +30,6 @@
 - Coil 
 - ViewModel
 - Coroutines
-- LiveData
 - Flow
 
 
