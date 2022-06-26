@@ -36,5 +36,4 @@
 
 ## Todo
 
-- Add image placeholder if api has no photos to give
-- Some code refactoring (Room)
+- Cache
