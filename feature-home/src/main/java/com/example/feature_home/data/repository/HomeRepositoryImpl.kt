@@ -11,7 +11,7 @@ class HomeRepositoryImpl(
     private val api: HomeApi
 ) : HomeRepository {
 
-    override suspend fun getTodayPhoto(): Flow<Resource<Photo>> = flow {
+    override fun getTodayPhoto(): Flow<Resource<Photo>> = flow {
         emit(Resource.Loading())
 
         try {
@@ -21,7 +21,7 @@ class HomeRepositoryImpl(
         }
     }
 
-    override suspend fun getRandomPhotos(): Flow<Resource<List<Photo>>> = flow {
+    override fun getRandomPhotos(): Flow<Resource<List<Photo>>> = flow {
         emit(Resource.Loading())
 
         try {

@@ -1,15 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<navigation
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/favorites"
-    app:startDestination="@id/favorites_screen">
+    android:id="@+id/nav_graph_favorites"
+    app:startDestination="@id/favorites">
 
     <fragment
-        android:id="@+id/favorites_screen"
+        android:id="@+id/favorites"
         android:name="com.example.feature_favorites.favorites_screen.presentation.favorites_screen.FavoritesFragment"
-        android:label="Favorites"
+        android:label="fragment_favorites"
         tools:layout="@layout/fragment_favorites" />
-
 </navigation>

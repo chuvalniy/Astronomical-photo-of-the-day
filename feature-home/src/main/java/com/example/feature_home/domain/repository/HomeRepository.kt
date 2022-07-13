@@ -6,8 +6,8 @@ import kotlinx.coroutines.flow.Flow
 
 interface HomeRepository {
 
-    suspend fun getTodayPhoto(): Flow<Resource<Photo>>
+    fun getTodayPhoto(): Flow<Resource<Photo>>
 
-    suspend fun getRandomPhotos(): Flow<Resource<List<Photo>>>
+    fun getRandomPhotos(): Flow<Resource<List<Photo>>>
 
 }
